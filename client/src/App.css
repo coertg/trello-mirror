@@ -1,1 +1,15 @@
-.app {}
+:root {
+  --theme-light-blue: #5EA5EE;
+  --theme-dark-blue: #343951;
+  --theme-dark-grey: #5C5C5C;
+  --theme-mid-grey: #E4EBEF;
+  --theme-light-grey: #F3F4F5;
+
+  --light-font-color: white;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  background-color: var(--theme-mid-grey);
+}
