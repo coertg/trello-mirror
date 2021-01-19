@@ -3,6 +3,9 @@ const NotFoundError = require('./not-found-error')
 require('dotenv').config()
 const { URL, URLSearchParams } = require('url')
 
+/**
+ * Service responsible for talking to the Trello API
+ */
 class TrelloService {
   constructor(){
     this.host = process.env.TRELLO_HOST
@@ -12,6 +15,10 @@ class TrelloService {
     this.boardName = 'The Pizza Project'
   }
 
+  /**
+   * Fetches all the lists and cards for the Trello board named 'The Pizza Project'
+   * @return {Promise<Object>}  Object containing board info
+   */
   getPizzaBoardInfo(){
     let url = new URL(`${this.host}/1/members/me/boards`)
     url.search = new URLSearchParams({
@@ -49,6 +56,11 @@ class TrelloService {
       
   }
 
+  /**
+   * Fetches all the lists associated with a board
+   * @param  {String}                 boardId   The id of the associated baord
+   * @return {Promise<Array<Object>}            Array of lists
+   */
   getLists(boardId){
     let url = new URL(`${this.host}/1/boards/${boardId}/lists`)
     url.search = new URLSearchParams({
@@ -66,6 +78,11 @@ class TrelloService {
       })
   }
 
+  /**
+   * Fetches all the cards associated with a board
+   * @param  {String}                 boardId   The id of the associated baord
+   * @return {Promise<Array<Object>}            Array of cards
+   */
   getCards(boardId){
     let url = new URL(`${this.host}/1/boards/${boardId}/cards`)
     url.search = new URLSearchParams({
