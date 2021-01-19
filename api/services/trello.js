@@ -23,8 +23,8 @@ class TrelloService {
       .then( boardListResult => {
         switch (boardListResult.status){
           case 200: return boardListResult.json()
-          case 404: throw NotFoundError('Could not find Trello boards')
-          default: throw Error(`Trello boards call responded with ${boardListResult.status}`)
+          case 404: throw new NotFoundError('Could not find Trello boards')
+          default: throw new Error(`Trello boards call responded with ${boardListResult.status}`)
         } 
       })
       .then( json => {
@@ -33,8 +33,8 @@ class TrelloService {
           if(possibleBoard)
             return possibleBoard
           else 
-            throw NotFoundError(`Could not find a Trello board named "${this.boardName}"`)
-        } else throw TypeError('Trello boards call did not return an array')
+            throw new NotFoundError(`Could not find a Trello board named "${this.boardName}"`)
+        } else throw new TypeError('Trello boards call did not return an array')
       })
       .then( board => {
         if(board.id) 
@@ -44,7 +44,7 @@ class TrelloService {
           ]).then( ([lists, cards]) => {
             return {...board, lists, cards}
           })
-        else throw TypeError('Trello API did not provide board ID')
+        else throw new TypeError('Trello API did not provide board ID')
       })
       
   }
@@ -60,8 +60,8 @@ class TrelloService {
       .then( listsResult => {
         switch (listsResult.status){
           case 200: return listsResult.json()
-          case 404: throw NotFoundError('Could not find Trello lists')
-          default: throw Error(`Trello lists call responded with ${listsResult.status}`)
+          case 404: throw new NotFoundError('Could not find Trello lists')
+          default: throw new Error(`Trello lists call responded with ${listsResult.status}`)
         } 
       })
   }
@@ -77,8 +77,8 @@ class TrelloService {
       .then( listsResult => {
         switch (listsResult.status){
           case 200: return listsResult.json()
-          case 404: throw NotFoundError('Could not find Trello cards')
-          default: throw Error(`Trello cards call responded with ${listsResult.status}`)
+          case 404: throw new NotFoundError('Could not find Trello cards')
+          default: throw new Error(`Trello cards call responded with ${listsResult.status}`)
         } 
       })
   }
